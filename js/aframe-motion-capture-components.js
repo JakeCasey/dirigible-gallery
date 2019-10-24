@@ -628,7 +628,7 @@
         throttledTick: function() {
           var self = this;
           var trackedControllerEls = this.el.querySelectorAll(
-            '[tracked-controls-webxr]',
+            '[tracked-controls]',
           );
           this.trackedControllerEls = {};
           trackedControllerEls.forEach(function setupController(
@@ -818,6 +818,18 @@
 
           return data;
         },
+        downloadObjectAsJson(exportObj, exportName) {
+          var dataStr =
+            'data:text/json;charset=utf-8,' +
+            encodeURIComponent(JSON.stringify(exportObj));
+          var downloadAnchorNode = document.createElement('a');
+          downloadAnchorNode.setAttribute('href', dataStr);
+          downloadAnchorNode.setAttribute('download', exportName + '.json');
+          document.body.appendChild(downloadAnchorNode);
+
+          downloadAnchorNode.click();
+          downloadAnchorNode.remove();
+        },
 
         /**
          * Store recording in IndexedDB using recordingdb system.
@@ -828,6 +840,13 @@
             return;
           }
           log('Recording stored in localStorage.');
+
+          // TODO: make downloading easier?
+          // TODO: Add download and loading back to inspector after 0.9.2?
+          // TODO: Figure out 'look-controls' ?
+          log('Sent download to user. . .');
+
+          this.downloadObjectAsJson(recordingData, 'test');
           this.el.systems.recordingdb.addRecording(
             data.recordingName,
             recordingData,
