@@ -18,7 +18,8 @@
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.1/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/super-hands@3.0.0/dist/super-hands.min.js"></script>
     <script src="//cdn.jsdelivr.net/gh/donmccurdy/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
-    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+
 
 
     <script
@@ -32,10 +33,10 @@
   <body>
     <img id="wasd" src="./assets/WASD.png" />
     <a-scene id="the_scene" 
-        debug
-        physics
+  environment="preset: forest;"
+        
+        physics="debug: true;"
         avatar-replayer="loop: true;"
-  environment="preset: tron; shadow: true"
     >
 
     <!-- <a-scene id="the_scene" 
@@ -95,14 +96,14 @@
 
       <a-obj-model 
       wall
-      position="8 0 -5"
+      position="8 .01 -5"
       scale="1 1 1"
       src="#crate-obj" mtl="#crate-mtl">
     </a-obj-model>
 
       <a-obj-model 
       wall
-      position="1 0 -5"
+      position="1 .01 -5"
       scale="1 1 1"
       src="#crate-obj" mtl="#crate-mtl">
 

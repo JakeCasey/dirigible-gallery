@@ -5,17 +5,22 @@
 AFRAME.registerComponent('wall', {
   init: function() {
     //create image
+    var frame = document.createElement('a-entity');
     var image = document.createElement('a-image');
     //set art attribute
     image.setAttribute('art', true);
 
+    frame.appendChild(image);
+
     //add image to wall segment
-    this.el.appendChild(image);
+    this.el.appendChild(frame);
   },
 });
 
 AFRAME.registerComponent('art', {
   init: function() {
+    console.log(this.el);
+    this.el.object3D.getWorldPosition(this.el.sceneEl.object3D.position);
     this.el.setAttribute('src', '#cypress');
     this.el.setAttribute('position', '0 1.75 -4');
   },
@@ -83,10 +88,15 @@ AFRAME.registerComponent('hall', {
 
     this.meshWallOne = new THREE.Mesh(geometry, material);
 
-    this.meshWallOne.position.copy(pointOne);
-    this.meshWallOne.lookAt(pointTwo);
+    // this.meshWallOne.position.copy(pointOne);
+    // this.meshWallOne.lookAt(pointTwo);
+
+    console.log(this.meshWallOne.position.copy(pointOne));
 
     wallOne.setAttribute('wall', true);
+    wallOne.setAttribute('class', 'wallOne');
+    wallOne.setAttribute('position', this.meshWallOne.position.copy(pointOne));
+    wallOne.setAttribute('rotation', this.meshWallOne.lookAt(pointTwo));
     wallOne.setObject3D('mesh', this.meshWallOne);
 
     var geometry2 = new THREE.BoxGeometry(width, height, length);
@@ -94,10 +104,11 @@ AFRAME.registerComponent('hall', {
 
     this.meshWallTwo = new THREE.Mesh(geometry2, material);
 
-    this.meshWallTwo.position.copy(pointOne);
-    this.meshWallTwo.lookAt(pointTwo);
-
     wallTwo.setAttribute('wall', true);
+    wallTwo.setAttribute('class', 'wallTwo');
+    wallTwo.setAttribute('position', this.meshWallTwo.position.copy(pointOne));
+    wallTwo.setAttribute('rotation', this.meshWallTwo.lookAt(pointTwo));
+
     wallTwo.setObject3D('mesh', this.meshWallTwo);
 
     this.el.appendChild(wallOne);
