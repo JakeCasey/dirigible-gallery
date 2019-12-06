@@ -5,7 +5,7 @@
     
     <!-- <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script> -->
 
-    <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
     <!-- recording -->
     <!-- MY VERSION -->
     <script src="./js/aframe-motion-capture-components.js"></script>
@@ -142,7 +142,7 @@
         <!-- music! -->
 
         <!-- Controllers. -->
-        <a-entity
+        <!-- <a-entity
           id="rightHand"
 
           mixin="touch"
@@ -150,12 +150,17 @@
           hand-controls="right"
           laser-controls="hand: right"
           line="color: white;"
+        ></a-entity> -->
+
+        <a-entity
+          id="rightHand"
+          mixin="touch"
+          hand-controls="right"
+          super-hands
         ></a-entity>
       
         <a-entity
           id="leftHand"
-
-          mixin="touch"
           super-hands
           hand-controls="left"
           teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head;button: trigger; ground: #groundTexture; hitCylinderColor: #c52126; curveHitColor: #c52126; curveMissColor: #333333; curveLineWidth: 0.01;"
