@@ -12,6 +12,10 @@
     <!-- wycers -->
     <!-- <script src="./js/aframe-motion-capture-components-wycers.js"></script> -->
 
+
+ <!-- maybe this for gui? --> 
+<!-- https://github.com/rdub80/aframe-gui -->
+
     <script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
     <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/webvr-polyfill@latest/build/webvr-polyfill.js"></script>
@@ -33,12 +37,12 @@
   <body>
     <img id="wasd" src="./assets/WASD.png" />
     <a-scene id="the_scene" 
-  environment="preset: forest;"
-        
+        environment="preset: default; lighting: none; ground: none;"
         physics="debug: true;"
         avatar-replayer="loop: true;"
     >
 
+<a-light type="point" color="white" position="-0.13645 6.81293 0.4276" light="color: #f9fff0; angle: 0; intensity: 1.6; groundColor: #fbe9ff"></a-light>
     <!-- <a-scene id="the_scene" 
     background="color: black;"
 
@@ -53,30 +57,35 @@
           id="groundTexture"
           src="./assets/floor.jpg"
         />
-
         <img
           id="cypress"
           src="./assets/art/cypresses.jpg"
         />
-        <img
-        id="concreteOCC"
-        src="./assets/Concrete_009_SD/Concrete_009_OCC.jpg" />
-        <img
-        id="concreteCOLOR"
-        src="./assets/Concrete_009_SD/Concrete_009_COLOR.jpg" />
-        <img
-        id="concreteDISP"
-        src="./assets/Concrete_009_SD/Concrete_009_DISP.png" />
+
 
         <img
-        id="concreteNORM"
-        src="./assets/Concrete_009_SD/Concrete_009_NORM.jpg" />
+          id="color"
+          src="./assets/Wood Floor_007_SD/Wood_Floor_007_COLOR.jpg"
+        />
 
         <img
-        id="concreteROUGH"
-        src="./assets/Concrete_009_SD/Concrete_009_ROUGH.jpg" />
-        <a-asset-item id="crate-obj" src="./assets/OBJ/model.obj"></a-asset-item>
-        <a-asset-item id="crate-mtl" src="./assets/OBJ/construction blocks.mtl"></a-asset-item>
+          id="disp"
+          src="./assets/Wood Floor_007_SD/Wood_Floor_007_DISP.jpg"
+        />
+        
+        <img
+          id="norm"
+          src="./assets/Wood Floor_007_SD/Wood_Floor_007_NORM.jpg"
+        />
+
+        <img
+          id="occ"
+          src="./assets/Wood Floor_007_SD/Wood_Floor_007_OCC.jpg"
+        />
+        <img
+          id="rough"
+          src="./assets/Wood Floor_007_SD/Wood_Floor_007_ROUGH.jpg"
+        />
 
         <a-mixin id="touch"
                  physics-collider phase-shift
@@ -84,48 +93,37 @@
                  static-body="shape: sphere; sphereRadius: .03"
                  >
         </a-mixin>
-
         <a-mixin id="cube" geometry="primitive: box; width: 0.33; height: 0.33; depth: 0.33"
                  hoverable grabbable stretchable draggable
                  dynamic-body shadow></a-mixin>
-
-
       </a-assets>
 
 
-
-      <a-obj-model 
-      wall
-      position="8 .01 -5"
-      scale="1 1 1"
-      src="#crate-obj" mtl="#crate-mtl">
-    </a-obj-model>
-
-      <a-obj-model 
-      wall
-      position="1 .01 -5"
-      scale="1 1 1"
-      src="#crate-obj" mtl="#crate-mtl">
-
-    </a-obj-model>
-
-     <a-entity class="cube" mixin="cube" position="0 0.265 -1" material="color: red"></a-entity>
+     <!-- <a-entity class="cube" mixin="cube" position="0 0.265 -1" material="color: red"></a-entity>
       <a-entity class="cube" mixin="cube" position="0 0.265 -0.5" material="color: red"></a-entity>
       <a-entity class="cube" mixin="cube" position="-1 0.265 -1" material="color: blue"></a-entity>
       <a-entity class="cube" mixin="cube" position="-1 0.265 -0.5" material="color: blue"></a-entity>
       <a-entity class="cube" mixin="cube" position="1 0.265 -1" material="color: green"></a-entity>
-      <a-entity class="cube" mixin="cube" position="1 0.265 -0.5" material="color: green"></a-entity>
+      <a-entity class="cube" mixin="cube" position="1 0.265 -0.5" material="color: green"></a-entity> -->
 
 
-      <a-hall path="1 1 1, 2 1 1"  width=".2"></a-hall>
+      <!-- <a-hall path=".01 .01 .01, 2 .01 .01"  width=".2"></a-hall> -->
 
-      <a-hall path="10 1 1, 20 1 1"  width=".2"></a-hall>
-      <a-hall path="1 1 1, 1 1 2" width=".2"></a-hall>
+      <a-entity id="single-wall" single-wall='width:.2' position="-0.09 -0.2652 -4.83" rotation="0 90 0"></a-entity>
+
+      <a-entity id="single-wall-2" single-wall="width: 0.2" position="4.831 -0.2652 0.033" rotation=""></a-entity>
+
+
+<a-entity id="wall-3" single-wall="width: 0.2" position="-5.05297 -0.2652 0.033" rotation="0 180 0"></a-entity>
+<a-entity id="single-wall-4" single-wall="width: 0.2" position="-0.09 -0.2652 4.93653" rotation="0 270 0"></a-entity>
 
       <!-- floor -->
       <!-- <a-grid static-body></a-grid> -->
 
+
     <!-- ground collider keeps objets from falling -->
+
+      <a-plane position="0 -1.499 -4" rotation="-90 0 0" width="4" height="4" scale="30 30 3" material="ambientOcclusionMap: #occ; displacementMap: #disp; normalMap: #norm; src: #color; repeat: 50 50"></a-plane>
       <a-box static-body width=100 height=0.001 depth=100 visible="false"></a-box>
 
       <a-entity
